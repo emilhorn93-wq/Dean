@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Einladung: Deans 2. Geburtstag</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #e1f5fe; /* Sanftes Bobo-Himmelblau */
+            --box-bg: #ffffff;   
+            --text-color: #333333;
+            --primary: #ffeb3b;  /* Fröhliches Gelb */
+            --secondary: #ef5350; /* Bobo Rot */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Nunito', sans-serif;
+            margin: 0;
+            padding: 20px;
+            text-align: center;
+            line-height: 1.6;
+        }
+
+        /* === HAUPT-CONTAINER === */
+        .frame-container {
+            position: relative;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            background-color: var(--box-bg); 
+            border-radius: 25px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+
+        /* Dekorative Bobo-Ohren am Container */
+        .ear {
+            position: absolute;
+            top: -20px;
+            width: 50px;
+            height: 50px;
+            background-color: #8d6e63;
+            border-radius: 50%;
+            z-index: -1;
+        }
+        .ear-left { left: 40px; }
+        .ear-right { right: 40px; }
+
+        h1 {
+            color: var(--secondary); 
+            font-size: 26px;
+            margin-bottom: 5px;
+            font-weight: 800;
+        }
+        
+        p { font-size: 16px; margin-bottom: 25px; color: #555; }
+
+        .info-box {
+            background: #fff9c4;
+            padding: 15px;
+            border-radius: 15px;
+            margin-bottom: 25px;
+            text-align: left;
+            border: 3px dashed #fbc02d;
+            font-size: 15px;
+        }
+
+        /* === FORMULAR STYLES === */
+        form {
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: 800;
+            margin-bottom: 5px;
+            color: #29b6f6;
+            font-size: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select,
+        textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #b3e5fc;
+            border-radius: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 15px;
+            box-sizing: border-box;
+            background-color: #f1fbf8;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            border-color: #29b6f6;
+            background-color: #fff;
+        }
+
+        /* === BUTTONS === */
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--primary);
+            color: #333;
+            border: none;
+            border-radius: 15px;
+            padding: 16px;
+            margin: 20px 0 10px 0;
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            cursor: pointer;
+            transition: transform 0.1s, box-shadow 0.1s;
+            box-shadow: 0 6px 0 #fbc02d;
+        }
+
+        .btn:active { 
+            transform: translateY(6px); 
+            box-shadow: 0 0 0 #fbc02d;
+        }
+
+        .btn-blue { background-color: #29b6f6; box-shadow: 0 6px 0 #0288d1; color: white; }
+
+        /* Animation für die Bestätigung */
+        #success-message {
+            display: none;
+            background-color: #c8e6c9;
+            color: #2e7d32;
+            padding: 20px;
+            border-radius: 15px;
+            font-weight: 800;
+            font-size: 18px;
+            margin-top: 20px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="frame-container">
+        <div class="ear ear-left"></div>
+        <div class="ear ear-right"></div>
+
+        <div style="font-size: 50px; margin-bottom: -15px;">🐹🎈</div>
+        <h1>Ich werde 2!</h1>
+        <p>Hallo! Ich lade euch ganz herzlich zu meiner <b>Bobo-Siebenschläfer-Party</b> ein.</p>
+        
+        <div class="info-box">
+            <p style="margin: 5px 0;">📅 <b>Wann:</b> Samstag, 24.10.2026</p>
+            <p style="margin: 5px 0;">⏰ <b>Ab:</b> 15:00 Uhr</p>
+            <p style="margin: 5px 0;">📍 <b>Wo:</b> Bei uns zuhause</p>
+        </div>
+
+        <p style="font-size: 14px; margin-bottom: 5px;">Bitte gebt meinen Eltern kurz Bescheid, damit wir besser planen können:</p>
+
+        <!-- === RSVP FORMULAR === -->
+        <form id="rsvpForm" onsubmit="sendWhatsApp(event)">
+            
+            <label for="guestName">Wer seid ihr?</label>
+            <input type="text" id="guestName" placeholder="Eure Namen eintragen..." required>
+
+            <label for="attendance">Seid ihr dabei?</label>
+            <select id="attendance" onchange="toggleDetails()" required>
+                <option value="" disabled selected>Bitte auswählen...</option>
+                <option value="Ja">Ja, wir kommen gerne! 🎉</option>
+                <option value="Nein">Nein, leider klappt es nicht 😢</option>
+            </select>
+
+            <div id="details-section" style="display: none;">
+                <label for="guestCount">Mit wie vielen Personen kommt ihr?</label>
+                <input type="number" id="guestCount" min="1" max="10" placeholder="Anzahl Personen">
+
+                <label for="arrivalTime">Wann seid ihr ungefähr da?</label>
+                <select id="arrivalTime">
+                    <option value="Pünktlich um 15:00 Uhr">Pünktlich um 15:00 Uhr 🍰</option>
+                    <option value="Gegen 15:30 Uhr">Gegen 15:30 Uhr 🚂</option>
+                    <option value="Später (ab 16:00 Uhr)">Später (ab 16:00 Uhr) 🎈</option>
+                </select>
+
+                <label for="foodDetails">Essenswünsche / Allergien?</label>
+                <textarea id="foodDetails" rows="3" placeholder="Gibt es Vegetarier, Allergien oder besondere Wünsche fürs Abendessen/Kuchen?"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-blue">Antwort senden 💌</button>
+        </form>
+
+        <div id="success-message">
+            🐹 Super! Deine Nachricht wurde vorbereitet.<br><br>Bitte drücke jetzt noch auf "Senden" in WhatsApp!
+        </div>
+
+    </div>
+
+    <script>
+        // Blendet die Details aus, falls jemand "Nein" auswählt
+        function toggleDetails() {
+            const attendance = document.getElementById("attendance").value;
+            const detailsSection = document.getElementById("details-section");
+            
+            if (attendance === "Ja") {
+                detailsSection.style.display = "block";
+            } else {
+                detailsSection.style.display = "none";
+            }
+        }
+
+        // Generiert die WhatsApp Nachricht
+        function sendWhatsApp(event) {
+            event.preventDefault(); // Verhindert das Neuladen der Seite
+
+            // HIER DEINE HANDYNUMMER EINTRAGEN (mit Ländercode, z.B. 49 für Deutschland, ohne + oder 0)
+            // Beispiel: 491701234567
+            const phoneNumber = "491700000000"; 
+
+            const name = document.getElementById("guestName").value;
+            const attendance = document.getElementById("attendance").value;
+            
+            let message = "";
+
+            if (attendance === "Ja") {
+                const count = document.getElementById("guestCount").value || "1";
+                const time = document.getElementById("arrivalTime").value;
+                const food = document.getElementById("foodDetails").value || "Keine Besonderheiten";
+
+                message = `Hallo! 🐹🎈\nHier ist unsere Rückmeldung für Deans 2. Geburtstag:\n\n*Name:* ${name}\n*Zusage:* Wir kommen! 🎉\n*Personen:* ${count}\n*Ankunft:* ${time}\n*Essen/Allergien:* ${food}\n\nWir freuen uns!`;
+            } else {
+                message = `Hallo! 🐹🎈\nHier ist unsere Rückmeldung für Deans 2. Geburtstag:\n\n*Name:* ${name}\n*Zusage:* Wir können leider nicht dabei sein. 😢\n\nWir wünschen euch trotzdem eine tolle Feier!`;
+            }
+
+            // WhatsApp URL generieren
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+            // Formular verstecken und Bestätigung zeigen
+            document.getElementById("rsvpForm").style.display = "none";
+            document.getElementById("success-message").style.display = "block";
+
+            // WhatsApp in neuem Tab/Fenster öffnen
+            window.open(whatsappUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
